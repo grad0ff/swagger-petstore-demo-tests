@@ -19,6 +19,19 @@ import org.apache.logging.log4j.io.IoBuilder;
  */
 public class RestAssuredConfig {
 
+  private static final Logger logger;
+  private static final AllureRestAssured allureRestAssured;
+  private static final PrintStream logStream;
+
+  static {
+    logger = LogManager.getLogger(RestAssuredConfig.class);
+    allureRestAssured = new AllureRestAssured()
+        .setRequestTemplate("custom-http-request.ftl")
+        .setResponseTemplate("custom-http-response.ftl");
+    logStream = IoBuilder.forLogger(logger)
+        .buildPrintStream();
+  }
+
   /**
    * Возвращает предварительно сконфигурированную спецификацию запроса Rest-Assured.
    *
@@ -30,19 +43,7 @@ public class RestAssuredConfig {
 
   private static class Holder {
 
-    private static final Logger logger;
-    private static final AllureRestAssured allureRestAssured;
-    private static final PrintStream logStream;
     private static final RequestSpecification requestSpec = getRequestSpecBuilder().build();
-
-    static {
-      logger = LogManager.getLogger(RestAssuredConfig.class);
-      allureRestAssured = new AllureRestAssured()
-          .setRequestTemplate("custom-http-request.ftl")
-          .setResponseTemplate("custom-http-response.ftl");
-      logStream = IoBuilder.forLogger(logger)
-          .buildPrintStream();
-    }
 
     private static RequestSpecBuilder getRequestSpecBuilder() {
       return new RequestSpecBuilder()
