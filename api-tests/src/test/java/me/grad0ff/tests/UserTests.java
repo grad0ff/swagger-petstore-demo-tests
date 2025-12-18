@@ -1,5 +1,6 @@
 package me.grad0ff.tests;
 
+import static me.grad0ff.allure.annotations.CodeAuthor.A_GRADOV;
 import static me.grad0ff.helpers.annotations.BodyType.SHORT;
 
 import io.qameta.allure.Allure;
@@ -12,9 +13,9 @@ import me.grad0ff.allure.annotations.Author;
 import me.grad0ff.api.controller.UserController;
 import me.grad0ff.api.dto.UserDto;
 import me.grad0ff.api.enums.StatusCode;
-import me.grad0ff.steps.AllureBasicSteps;
 import me.grad0ff.helpers.annotations.UserBody;
 import me.grad0ff.helpers.providers.UserExtension;
+import me.grad0ff.steps.AllureBasicSteps;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -25,7 +26,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @Feature("user")
 @Story("/user")
 @Tags({@Tag("api"), @Tag("user")})
-@Author("grad0ff")
+@Author(A_GRADOV)
 @ExtendWith(UserExtension.class)
 public class UserTests extends ApiBaseTest {
 
@@ -53,10 +54,15 @@ public class UserTests extends ApiBaseTest {
           );
           Allure.step(
               "- проверить поля тела ответа",
-              () -> softly.assertThat(response.as(UserDto.class))
-                  .usingRecursiveComparison()
-                  .comparingOnlyFields("username", "password")
-                  .isEqualTo(user)
+              () -> {
+                var actual = response.as(UserDto.class);
+                softly.assertThat(actual)
+                    .usingRecursiveComparison()
+                    .comparingOnlyFields("username", "password")
+                    .isEqualTo(user);
+                softly.assertThat(actual.id())
+                    .isInstanceOf(Integer.class);
+              }
           );
         }
     );

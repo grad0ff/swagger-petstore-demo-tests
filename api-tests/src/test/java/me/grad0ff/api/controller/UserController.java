@@ -26,7 +26,32 @@ public class UserController {
   }
 
   /**
-   * Отправляет DELETE-запрос для удаления пользователя по имени пользователя.
+   * Отправляет GET-запрос для получения пользователя по его имени.
+   *
+   * @param username имя искомого пользователя
+   * @return объект {@link Response}, представляющий ответ сервера
+   */
+  public Response getUserUsername(Object username) {
+    return given()
+        .spec(requestSpec())
+        .get(USER_USERNAME, username);
+  }
+
+  /**
+   * Отправляет PUT-запрос для обновления данных пользователя.
+   *
+   * @param body тело запроса, содержащее обновленные данные пользователя
+   * @return объект {@link Response}, представляющий ответ сервера
+   */
+  public Response putUserUsername(Object username, Object body) {
+    return given()
+        .spec(requestSpec())
+        .body(body)
+        .put(USER_USERNAME, username);
+  }
+
+  /**
+   * Отправляет DELETE-запрос для удаления пользователя по его имени.
    *
    * @param username имя пользователя, подлежащего удалению
    * @return объект {@link Response}, представляющий ответ сервера
