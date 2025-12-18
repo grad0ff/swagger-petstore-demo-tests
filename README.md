@@ -16,7 +16,7 @@
 <a href="https://docker.com/"><img alt="Telegram" width="50" height="50" src="resources/technologies/telegram.svg"/></a>
 <a href="https://docker.com/"><img alt="Ubuntu" width="50" height="50" src="resources/technologies/ubuntu.png"/></a>
 
-\* Java, Junit 5, REST Assured, AssertJ, Gatling, Allure Report, Allure TestOps, Jenkins, Docker, Maven
+\* Java, Junit 5, REST Assured, AssertJ, Gatling, Allure TestOps, Allure Report, Jenkins, Docker, Maven, GitHub, Telegram, Ubuntu
 
 ## Структура
 
@@ -37,8 +37,7 @@
 
 Разработаны сценарии проверки:
 
-* ⚪️ авторизация
-* ⚪️ добавление в каталог + продажа
+* ⚪️ авторизация + поиск + покупка
 
 ## Тест-менеджмент
 
@@ -48,8 +47,14 @@ TMS доступен по [ссылке](https://peachrey.testops.cloud/project/
 
 Реализованы возможности:
 
-* 🟢 генерация тест-кейсов в Allure TestOps из кода;
-* 🟡 интеграция c Jenkins (запуск проверок, выгрузка отчетов)
+* 🟢 генерация тест-кейсов в Allure TestOps из кода
+* ⚪️ интеграция c Jenkins (запуск проверок, выгрузка отчетов)
+
+<div>
+    <img src="resources/screens/test_case_1.png" width=65% alt="test_case_1"/>
+    <br/>
+    <img src="resources/screens/test_case_2.png" width=65% alt="test_case_1"/>
+</div>
 
 ## Отчетность
 
@@ -57,7 +62,11 @@ TMS доступен по [ссылке](https://peachrey.testops.cloud/project/
 
 Реализованы возможности:
 
-* ⚪️ генерация Allure отчетов по каждому запуску;
+* 🟢 генерация Allure отчетов по каждому запуску
+
+<div>
+    <img src="resources/screens/jenkins_1.png" width=65% alt="test_case_1"/>
+</div>
 
 ## CI
 
@@ -68,6 +77,10 @@ TMS доступен по [ссылке](https://peachrey.testops.cloud/project/
 * 🟢 интеграция с Allure TesOps
 * ⚪️ рассылка уведомлений и отчетов в Telegram и Email
 
+<div>
+    <img src="resources/screens/allure_report_1.png" width=65% alt="test_case_1"/>
+</div>
+
 ## VM
 
 В Docker запущены контейнеры с приложениями:
@@ -75,8 +88,11 @@ TMS доступен по [ссылке](https://peachrey.testops.cloud/project/
 * 🟢 Jenkins
 * 🟢 Swagger Petstore
 
+<div>
+    <img src="resources/screens/docker_1.png" width=65% alt="test_case_1"/>
+</div>
+
 ## Код
 
-Код проекта доступен в Github
-репозитории [swagger-petstore-demo-tests](https://github.com/grad0ff/swagger-petstore-demo-tests.git)
+Код проекта в Github [swagger-petstore-demo-tests](https://github.com/grad0ff/swagger-petstore-demo-tests.git)
 
