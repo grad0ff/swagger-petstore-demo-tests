@@ -1,4 +1,4 @@
-package me.grad0ff.tests;
+package me.grad0ff.tests.user;
 
 import static me.grad0ff.allure.annotations.CodeAuthor.A_GRADOV;
 import static me.grad0ff.helpers.annotations.BodyType.FULL;
@@ -11,13 +11,14 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import me.grad0ff.allure.annotations.Author;
+import me.grad0ff.api.constants.StatusCode;
 import me.grad0ff.api.controller.UserController;
 import me.grad0ff.api.dto.UserDto;
-import me.grad0ff.api.constants.StatusCode;
 import me.grad0ff.helpers.annotations.UserBody;
 import me.grad0ff.helpers.providers.UserExtension;
 import me.grad0ff.steps.AllureBasicSteps;
 import me.grad0ff.steps.ApiSteps;
+import me.grad0ff.tests.ApiBaseTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;

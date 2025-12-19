@@ -54,7 +54,8 @@ public class UserBodyTemplate {
      * @return объект {@link UserDto}
      */
     public UserDto body() {
-      return common().build();
+      return common()
+          .build();
     }
 
     UserDto.UserDtoBuilder<?, ?> common() {
@@ -75,7 +76,7 @@ public class UserBodyTemplate {
   @SuperBuilder
   public static class FullBody extends ShortBody {
 
-    private Long id;
+    private long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -89,7 +90,7 @@ public class UserBodyTemplate {
      * @return объект {@link UserDto}
      */
     public UserDto body() {
-      id = Objects.nonNull(id) ? id : Faker.instance().number().randomNumber();
+      id = id == 0 ? id : Faker.instance().number().randomNumber();
       firstName = Objects.nonNull(firstName) ? firstName : Faker.instance().name().firstName();
       lastName = Objects.nonNull(lastName) ? lastName : Faker.instance().name().lastName();
       email = Objects.nonNull(email) ? email : Faker.instance().internet().emailAddress();
@@ -97,7 +98,7 @@ public class UserBodyTemplate {
       userStatus = Objects.nonNull(userStatus) ? userStatus : 1;
 
       return common()
-          .id(id.intValue())
+          .id(id)
           .firstName(firstName)
           .lastName(lastName)
           .email(email)

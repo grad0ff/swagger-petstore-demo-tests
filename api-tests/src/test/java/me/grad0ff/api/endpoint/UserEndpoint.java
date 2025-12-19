@@ -1,9 +1,13 @@
 package me.grad0ff.api.endpoint;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
- * Класс, содержащий эндпоинты API.
+ * Класс, содержащий эндпоинты контроллера {@code user}.
  */
-public class Endpoints {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class UserEndpoint {
 
   public static final String USER = "user";
   public static final String USER_CREATE_WITH_LIST = "user/createWithList";

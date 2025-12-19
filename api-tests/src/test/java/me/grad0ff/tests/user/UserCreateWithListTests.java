@@ -1,7 +1,6 @@
-package me.grad0ff.tests;
+package me.grad0ff.tests.user;
 
 import static me.grad0ff.allure.annotations.CodeAuthor.A_GRADOV;
-import static me.grad0ff.api.constants.ResourceLockType.USER_SESSION;
 import static me.grad0ff.helpers.annotations.BodyType.SHORT;
 
 import io.qameta.allure.Allure;
@@ -10,51 +9,46 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
-import java.util.Map;
-import java.util.regex.Pattern;
+import java.util.List;
 import me.grad0ff.allure.annotations.Author;
+import me.grad0ff.api.constants.StatusCode;
 import me.grad0ff.api.controller.UserController;
 import me.grad0ff.api.dto.UserDto;
-import me.grad0ff.api.constants.StatusCode;
 import me.grad0ff.helpers.annotations.UserBody;
 import me.grad0ff.helpers.providers.UserExtension;
 import me.grad0ff.steps.AllureBasicSteps;
-import me.grad0ff.steps.ApiSteps;
+import me.grad0ff.tests.ApiBaseTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.parallel.ResourceLock;
 
 @Feature("user")
-@Story("/user/login")
+@Story("/user/createWithList")
 @Tags({@Tag("api"), @Tag("user")})
 @Author(A_GRADOV)
-@ResourceLock(USER_SESSION)
 @ExtendWith(UserExtension.class)
-public class UserLoginTests extends ApiBaseTest {
+public class UserCreateWithListTests extends ApiBaseTest {
 
-  private final ApiSteps apiSteps = new ApiSteps();
   private final UserController controller = new UserController();
 
   @Test
-  @AllureId("73")
-  @DisplayName("GET. 200 - OK. Авторизоваться по логину и паролю")
-  @Description("Проверяет успешную авторизацию пользователя по логину и паролю")
-  void getUserLogin(@UserBody(SHORT) UserDto user) {
-    AllureBasicSteps.arrangeStep();
-    apiSteps.createUser(user);
-
+  @AllureId("72")
+  @DisplayName("POST. 200 - OK. Создать нескольких пользователей")
+  @Description("Проверяет успешное создание нескольких пользователей")
+  void postUserCreateWithList(@UserBody(SHORT) UserDto firstUser, @UserBody(SHORT) UserDto secondUser) {
+    AllureBasicSteps.actionStep();
+    List<Object> users = List.of(firstUser, secondUser);
     Response response = Allure.step(
-        "Авторизоваться по логину и паролю",
-        () -> controller.getUserLogin(Map.of(user.username(), user.password()))
+        "Создать пользователей",
+        () -> controller.postUserCreateWithList(users)
     );
 
     AllureBasicSteps.assertionStep();
     Allure.step(
-        "Проверить авторизацию:",
+        "Проверить создание пользователей:",
         () -> {
           Allure.step(
               "- проверить код ответа",
@@ -62,11 +56,13 @@ public class UserLoginTests extends ApiBaseTest {
                   .isEqualTo(StatusCode.OK)
           );
           Allure.step(
-              "- проверить тело ответа",
+              "- проверить поля тела ответа",
               () -> {
-                var responsePattern = Pattern.compile("Logged in user session: \\d+");
-                softly.assertThat(response.getBody().asString())
-                    .containsPattern(responsePattern);
+                var actual = response.jsonPath().getList("", UserDto.class);
+                softly.assertThat(actual)
+                    .usingRecursiveComparison()
+                    .comparingOnlyFields("username", "password")
+                    .isEqualTo(users);
               }
           );
         }

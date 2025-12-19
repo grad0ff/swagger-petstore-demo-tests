@@ -1,11 +1,11 @@
 package me.grad0ff.api.controller;
 
 import static io.restassured.RestAssured.given;
-import static me.grad0ff.api.endpoint.Endpoints.USER;
-import static me.grad0ff.api.endpoint.Endpoints.USER_CREATE_WITH_LIST;
-import static me.grad0ff.api.endpoint.Endpoints.USER_LOGIN;
-import static me.grad0ff.api.endpoint.Endpoints.USER_LOGOUT;
-import static me.grad0ff.api.endpoint.Endpoints.USER_USERNAME;
+import static me.grad0ff.api.endpoint.UserEndpoint.USER;
+import static me.grad0ff.api.endpoint.UserEndpoint.USER_CREATE_WITH_LIST;
+import static me.grad0ff.api.endpoint.UserEndpoint.USER_LOGIN;
+import static me.grad0ff.api.endpoint.UserEndpoint.USER_LOGOUT;
+import static me.grad0ff.api.endpoint.UserEndpoint.USER_USERNAME;
 import static me.grad0ff.configs.RestAssuredConfig.requestSpec;
 
 import io.restassured.response.Response;
@@ -14,7 +14,7 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Класс для взаимодействия с API пользователя через HTTP-запросы.
+ * Класс для взаимодействия с контроллером {@code user} backend сервиса через HTTP-запросы.
  */
 @Slf4j
 public class UserController {

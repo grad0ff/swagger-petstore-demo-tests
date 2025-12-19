@@ -27,11 +27,11 @@
 
 ## Тесты API
 
-Разработаны тесты на компоненты:
+Разработаны тесты на контроллеры:
 
-* 🟢 user
-* ⚪️ store
-* ⚪️ pet
+* 🟢 user (позитивные проверки)
+* ⚪️ store (позитивные проверки)
+* ⚪️ pet (позитивные проверки)
 
 ## Тесты производительности
 
@@ -94,5 +94,5 @@ TMS доступен по [ссылке](https://peachrey.testops.cloud/project/
 
 ## Код
 
-Код проекта в Github [swagger-petstore-demo-tests](https://github.com/grad0ff/swagger-petstore-demo-tests.git)
+Ссылка на GitHub репозиторий: [swagger-petstore-demo-tests](https://github.com/grad0ff/swagger-petstore-demo-tests.git)
 

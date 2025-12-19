@@ -20,7 +20,7 @@ import org.junit.jupiter.api.extension.support.TypeBasedParameterResolver;
  */
 public class UserExtension extends TypeBasedParameterResolver<UserDto> implements AfterAllCallback {
 
-  private static final List<String> userNames = new ArrayList<>();
+  private final List<String> userNames = new ArrayList<>();
   private final UserController controller = new UserController();
 
   /**

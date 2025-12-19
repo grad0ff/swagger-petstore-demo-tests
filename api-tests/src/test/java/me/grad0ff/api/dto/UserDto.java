@@ -28,7 +28,7 @@ public class UserDto {
   private String phone;
 
   @JsonProperty("id")
-  private int id;
+  private long id;
 
   @JsonProperty("email")
   private String email;
