@@ -13,7 +13,7 @@ import io.restassured.response.Response;
 import me.grad0ff.allure.annotations.Author;
 import me.grad0ff.api.controller.UserController;
 import me.grad0ff.api.dto.UserDto;
-import me.grad0ff.api.enums.StatusCode;
+import me.grad0ff.api.constants.StatusCode;
 import me.grad0ff.helpers.annotations.UserBody;
 import me.grad0ff.helpers.providers.UserExtension;
 import me.grad0ff.steps.AllureBasicSteps;
@@ -51,7 +51,7 @@ public class UserUserNameTests extends ApiBaseTest {
 
     AllureBasicSteps.assertionStep();
     Allure.step(
-        "Проверить получение данных пользователя:",
+        "Проверить получение данных:",
         () -> {
           Allure.step(
               "- проверить код ответа",
@@ -86,7 +86,7 @@ public class UserUserNameTests extends ApiBaseTest {
 
     AllureBasicSteps.assertionStep();
     Allure.step(
-        "Проверить обновление данных пользователя:",
+        "Проверить обновление данных:",
         () -> {
           Allure.step(
               "- проверить код ответа",
@@ -121,7 +121,7 @@ public class UserUserNameTests extends ApiBaseTest {
 
     AllureBasicSteps.assertionStep();
     Allure.step(
-        "Проверить удаление пользователя:",
+        "Проверить удаление:",
         () -> {
           Allure.step(
               "- проверить код ответа",

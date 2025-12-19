@@ -9,6 +9,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
+import java.util.List;
 import me.grad0ff.allure.annotations.Author;
 import me.grad0ff.api.controller.UserController;
 import me.grad0ff.api.dto.UserDto;
@@ -24,28 +25,29 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @Feature("user")
-@Story("/user")
+@Story("/user/createWithList")
 @Tags({@Tag("api"), @Tag("user")})
 @Author(A_GRADOV)
 @ExtendWith(UserExtension.class)
-public class UserTests extends ApiBaseTest {
+public class UserCreateWithListTests extends ApiBaseTest {
 
   private final UserController controller = new UserController();
 
   @Test
-  @AllureId("1")
-  @DisplayName("POST. 200 - OK. Создать пользователя")
-  @Description("Проверяет успешное создание пользователя")
-  void postUser(@UserBody(SHORT) UserDto user) {
+  @AllureId("72")
+  @DisplayName("POST. 200 - OK. Создать нескольких пользователей")
+  @Description("Проверяет успешное создание нескольких пользователей")
+  void postUserCreateWithList(@UserBody(SHORT) UserDto firstUser, @UserBody(SHORT) UserDto secondUser) {
     AllureBasicSteps.actionStep();
+    List<Object> users = List.of(firstUser, secondUser);
     Response response = Allure.step(
-        "Создать пользователя",
-        () -> controller.postUser(user)
+        "Создать пользователей",
+        () -> controller.postUserCreateWithList(users)
     );
 
     AllureBasicSteps.assertionStep();
     Allure.step(
-        "Проверить создание пользователя:",
+        "Проверить создание пользователей:",
         () -> {
           Allure.step(
               "- проверить код ответа",
@@ -55,13 +57,11 @@ public class UserTests extends ApiBaseTest {
           Allure.step(
               "- проверить поля тела ответа",
               () -> {
-                var actual = response.as(UserDto.class);
+                var actual = response.jsonPath().getList("", UserDto.class);
                 softly.assertThat(actual)
                     .usingRecursiveComparison()
                     .comparingOnlyFields("username", "password")
-                    .isEqualTo(user);
-                softly.assertThat(actual.id())
-                    .isInstanceOf(Integer.class);
+                    .isEqualTo(users);
               }
           );
         }
